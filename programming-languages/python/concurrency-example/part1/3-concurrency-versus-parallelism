@@ -1,0 +1,44 @@
+In this video, we are going to take a look at ...
+- What is Concurrency?
+- What is Parallelism?
+- Example - Concurrency vs Parallelism
+
+# What is Concurrency?
+- Ability to create programs that can run multiple tasks
+- Structure of the program
+
+##########################################################################
+
+Task A: ------>                    ------>                    ------> 
+          run   \                 /  run   \                 /  run
+                 \               /          \               /
+    task switch   \             /            \             / task switch
+                   \           /              \           /
+                    \         /                \         /
+Task B:              -------->                  -------->
+                       run                         run
+
+##########################################################################
+
+
+# What is Parallelism
+- Ability to run tasks at the same time
+- Execution of the program
+- Multiple task can run on the multiple cores of the computer at the same time
+- 4 cores means that you can do four things at the same time
+
+##########################################################################
+
+Task A: ----->  --------->  --------->  CPU 1
+Task B: --------> ------> ------->      CPU 2
+
+##########################################################################
+
+
+# Example
+- Concurrency - Operating system drivers
+Operating system driver like mouse and keyboard are run concurrent
+
+- Parallelism - Vector dot product
+For example you split the problem into smaller pieces and ask all of the to be run the same time on multi-core processor
+

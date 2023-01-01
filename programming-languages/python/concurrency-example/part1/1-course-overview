@@ -1,0 +1,29 @@
+
+What We'll learn?
+- Section 1
+  Introuduction to Concurrent Programming
+
+- Section 2 
+  Creating and Managing Threads
+
+- Section 3
+  Thread Synchronization Primitives
+
+- Section 4 
+  Creating and Managing Processes
+
+- Section 5 
+  Synchronization and Interprocess Communication 
+
+- Section 6
+  Using a Pool of Workers
+
+---------
+
+Course Goals
+- Able to differentiate between Parallelism and Concurrency
+- Know standard python modules for parallel/concurrent execution
+- Write multithreaded programs in Python
+- Overcome the limiattions of Python GIL
+- Write programs the maximize the usage of hardware
+

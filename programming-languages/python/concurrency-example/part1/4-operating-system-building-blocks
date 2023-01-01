@@ -1,0 +1,18 @@
+In this video, we are going to take a look at
+- Introduce process
+- Introduce thread
+- OS view of process and thread
+
+# Introduce process
+- The process is an execution of a program
+- Basic "unit"
+- Program in memory
+- Abstraction of state
+- The process need more resources
+
+
+# Introduce thread
+- Light weight
+- Multiple threads can share same resources within a process
+- Share address space
+- Processor executes threads

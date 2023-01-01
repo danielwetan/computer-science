@@ -1,0 +1,32 @@
+In this section, we are going to take a look at
+- Advanced OSes and programming environments
+- Concurrency versus parallelism
+- Libraries in python, used to achieve concurrency and parallelism
+- Operating System's building blocks of parallel execution
+- Python's Global Interpreter Lock (GIL)
+
+# Advanced OSes and programming environments
+- Evaluation of computing hardware
+- Advancement of OSes to support concurrency
+- Programmers' interface to concurrency
+
+Moore's Law
+The number of transistors in a dense integrated circuit doubles approximately two years.
+The meaning of this is that processing power of a computer would double every two years.
+
+Dual-Core Processor
+Each core is capable of executing instructions simultaneously without interfering or depending on the other cores.
+This meant that multiple tasks could run at the same time and processors concurrently, and that if only one task is run then the remaining cores would be idle.
+
+Operating System
+- Process and thread
+- Process scheduling
+- Virtual memory
+- Inter-process communication
+- Process synchronization
+
+OS interface
+- Libraries of supervisor calls
+- Special (syntactically distinct) language constructs
+- Subroutine libraries in programming languages
+

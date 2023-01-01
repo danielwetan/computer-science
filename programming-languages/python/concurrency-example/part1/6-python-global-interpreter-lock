@@ -1,0 +1,12 @@
+In this video, we are going to take a look at
+- Multithreading brings parallelism
+- Global interpreter lock
+- How do we overcome
+
+# Global interpreter lock
+- GIL is inherent to Cpython
+- CPU bound vs IO bound
+- Jpython is free from GIL
+- Multiprocessing module
+- Intelligent awarenses of GIL
+

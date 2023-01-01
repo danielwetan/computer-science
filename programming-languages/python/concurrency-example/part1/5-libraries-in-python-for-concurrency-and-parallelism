@@ -1,0 +1,22 @@
+In this video, we are going to take a look at
+- Threading
+- Multiprocessing
+- Queue
+
+# Threading
+- This module is loosely based of Java languages
+- Available in Python version 1.5+
+- Wrapper on _thread module
+- Threading and Synchronization Constructs
+
+
+# Multiprocessing
+- Available in Python version 2.6+
+- Process based parallelism
+- Overcome GIL limitations
+
+
+# Queue
+- Synchronized Queue class
+- Produces-Consumer problem easily
+- Implements Locking hiding complexities
