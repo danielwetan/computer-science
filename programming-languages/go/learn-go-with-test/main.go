@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	dependencyinjection "danielwetan/learn-go-with-test/dependency_injection"
+	"log"
+	"net/http"
+)
 
 func main() {
-	fmt.Println("Hello World")
+	log.Fatal(http.ListenAndServe(":5001", http.HandlerFunc(dependencyinjection.MyGreeterHandler)))
 }
