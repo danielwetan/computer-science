@@ -1,3 +1,11 @@
+# Traversing a tree means visiting every node in the tree. You might, for instance, want to add all the values in the tree or find the largest one. 
+# For all these operations, you will need to visit each node of the tree.
+#
+# Linear data structures like arrays, stacks, queues, and linked list have only one way to read the data. 
+# But a hierarchical data structure like a tree can be traversed in different ways.
+# 
+# Reference: https://www.programiz.com/dsa/tree-traversal
+
 class TreeNode:
   def __init__(self, value):
     self.value = value 

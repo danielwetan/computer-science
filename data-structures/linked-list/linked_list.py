@@ -17,6 +17,8 @@
 # - Implemented in stack and queue
 # - In undo functionality of softwares
 # - Hash tables, Graphs
+#
+# Reference: https://www.programiz.com/dsa/linked-list
 
 class Node:
   def __init__(self, item):

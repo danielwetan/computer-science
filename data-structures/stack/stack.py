@@ -17,6 +17,8 @@
 # - IsEmpty: Check if the stack is empty
 # - IsFull: Check if the stack is full
 # - Peek: Get the value of the top element without removing it
+#
+# Reference: https://www.programiz.com/dsa/stack
 
 def create_stack():
     stack = []
