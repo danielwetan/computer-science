@@ -1,3 +1,5 @@
+const assert = require('assert')
+
 class ListNode {
   constructor(value) {
     this.value = value;
@@ -18,8 +20,6 @@ function hasCycle(head) {
     fast = fast.next.next; // move fast pointers by 2 step
 
     if (slow === fast) {
-      console.log(slow.value, " ", fast.value);
-
       return true; // cycle detected
     }
   }
@@ -41,7 +41,7 @@ const nodeC = new ListNode("C");
 nodeA.next = nodeB;
 nodeB.next = nodeC;
 
-console.log(hasCycle(nodeA)); // Output: false
+assert.equal(hasCycle(nodeA), false)
 
 // Example 2: Linked List with a Cycle
 const nodeX = new ListNode("X");
@@ -52,4 +52,4 @@ nodeX.next = nodeY;
 nodeY.next = nodeZ;
 nodeZ.next = nodeY; // Creates a cycle
 
-console.log(hasCycle(nodeX)); // Output: true
+assert.equal(hasCycle(nodeX), true)
