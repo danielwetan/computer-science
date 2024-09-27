@@ -1,3 +1,10 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 export const description =
@@ -6,24 +13,21 @@ export const description =
 export default function SalesPage() {
   return (
     <>
-      <div className="flex flex-1 p-4">
+      <div className="flex flex-1 p-1">
         {/* Left Section (1/3 width) */}
-        <div className="flex-2 border-r border-muted p-4">
-          <div className="flex flex-col items-center gap-1 text-center">
-            <h3 className="text-2xl font-bold tracking-tight">
-              You have no sales
-            </h3>
+        <div className="w-1/3 min-w-[200px] border-r border-muted p-4">
+          <div className="flex flex-col items-start gap-2 text-left">
+            <p className="text-sm text-muted-foreground">Cheese Burger</p>
             <p className="text-sm text-muted-foreground">
-              You can start selling as soon as you add a sale.
+              <b>1 Pcs</b> x Rp20.000
             </p>
-            <Button className="mt-4">Add Sales</Button>
           </div>
         </div>
         {/* Right Section (2/3 width) */}
-        <div className="flex-1 p-4">
-          <h2 className="text-lg font-semibold">Left Section</h2>
+        <div className="w-2/3 p-4">
+          <h2 className="text-lg font-semibold">Right Section</h2>
           <p>
-            This is the left section with 1/3 width. You can add relevant
+            This is the right section with 2/3 width. You can add relevant
             content here.
           </p>
         </div>
