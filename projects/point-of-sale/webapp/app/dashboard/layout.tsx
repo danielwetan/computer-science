@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { Bell, Home, Menu, Package, Package2, CircleUser, Search } from "lucide-react";
+import {
+  Bell,
+  Home,
+  Menu,
+  Package,
+  Package2,
+  CircleUser,
+  Search,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -13,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 
 export default function DashboardLayout({
   children,
@@ -141,9 +149,6 @@ export default function DashboardLayout({
           </DropdownMenu>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          <div className="flex items-left">
-            <h1 className="text-lg font-semibold md:text-2xl">Page Name</h1>
-          </div>
           {children}
         </main>
       </div>
