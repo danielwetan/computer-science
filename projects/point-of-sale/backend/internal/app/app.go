@@ -16,6 +16,10 @@ type App interface {
 	// Auth
 	Login(ctx context.Context, request *model.LoginRequest) (*model.LoginResponse, error)
 	Register(ctx context.Context, request *model.CreateUserRequest) error
+	ClaimJWTToken(tokenString string) (*model.JWTClaims, error)
+
+	// Users
+	GetProfile(ctx context.Context) (*model.User, error)
 }
 
 func New(store store.Store) App {

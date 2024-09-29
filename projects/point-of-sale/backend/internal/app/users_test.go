@@ -3,123 +3,47 @@ package app
 import (
 	"backend/model"
 	"context"
-	"errors"
 	"testing"
 )
 
-func TestLogin(t *testing.T) {
+func TestGetProfile(t *testing.T) {
 	th := SetupTestHelper(t)
 
 	var (
-		email        = "danielwetan.io@gmail.com"
-		password     = "12345678"
-		hashPassword = "$2a$10$Kki4YnIBGNy7yBTtM7ZgdewxM4Q1WxnEG.uxY2lXWNVIjmKCt4toG"
+		ctx = context.Background()
 
-		ctx            = context.Background()
-		invalidPayload = &model.LoginRequest{}
-		payload        = &model.LoginRequest{
-			Email:    email,
-			Password: password,
-		}
+		emptyEmail = ""
+		email      = "danielwetan.io@gmail.com"
+
+		ctxWithEmptyEmail = context.WithValue(ctx, "email", emptyEmail)
+		ctxWithEmail      = context.WithValue(ctx, "email", email)
 
 		user = &model.User{
-			ID:       1,
-			Email:    email,
-			Password: hashPassword,
-		}
-	)
-
-	testCases := []struct {
-		name     string
-		request  *model.LoginRequest
-		wantErr  bool
-		mockFunc func()
-	}{
-		{
-			name:     "#1. Login with invalid payload",
-			request:  invalidPayload,
-			wantErr:  true,
-			mockFunc: func() {},
-		},
-		{
-			name:    "#2. Login with invalid email",
-			request: payload,
-			wantErr: true,
-			mockFunc: func() {
-				th.Store.EXPECT().GetUserByEmail(ctx, payload.Email).Return(nil, model.ErrDataNotFound)
-			},
-		},
-		{
-			name:    "#3. Login success",
-			request: payload,
-			wantErr: false,
-			mockFunc: func() {
-				th.Store.EXPECT().GetUserByEmail(ctx, payload.Email).Return(user, nil)
-			},
-		},
-	}
-
-	for _, test := range testCases {
-		t.Run(test.name, func(t *testing.T) {
-			test.mockFunc()
-			response, err := th.App.Login(ctx, test.request)
-			if (err != nil) != test.wantErr {
-				t.Errorf("expected error = %v, but got = %v", test.wantErr, err)
-			}
-
-			if response != nil && response.JWTToken == "" {
-				t.Errorf("expected got jwt_token, but nil")
-			}
-		})
-	}
-}
-
-func TestRegister(t *testing.T) {
-	th := SetupTestHelper(t)
-
-	var (
-		email    = "danielwetan.io@gmail.com"
-		password = "12345678"
-
-		ctx            = context.Background()
-		invalidPayload = &model.CreateUserRequest{}
-		payload        = &model.CreateUserRequest{
-			Email:    email,
-			Password: password,
-		}
-
-		user = &model.User{
+			ID:    1,
 			Email: email,
 		}
 	)
 
 	testCases := []struct {
 		name     string
-		request  *model.CreateUserRequest
+		request  context.Context
+		response *model.User
 		wantErr  bool
 		mockFunc func()
 	}{
 		{
-			name:     "#1. Register with invalid payload",
-			request:  invalidPayload,
+			name:     "#1. Get profile with invalid email",
+			request:  ctxWithEmptyEmail,
 			wantErr:  true,
 			mockFunc: func() {},
 		},
 		{
-			name:    "#2. Register with already exists user",
-			request: payload,
-			wantErr: true,
+			name:     "#2. Get profile success",
+			request:  ctxWithEmail,
+			response: user,
+			wantErr:  false,
 			mockFunc: func() {
-				th.Store.EXPECT().GetUserByEmail(ctx, payload.Email).Return(user, errors.New("user already exists"))
-			},
-		},
-		{
-			name:    "#3. Register success",
-			request: payload,
-			wantErr: false,
-			mockFunc: func() {
-				th.Store.EXPECT().GetUserByEmail(ctx, payload.Email).Return(nil, nil)
-				th.Store.EXPECT().CreateUser(ctx, payload).Return(nil)
+				th.Store.EXPECT().GetUserByEmail(ctxWithEmail, email).Return(user, nil)
 			},
 		},
 	}
@@ -127,9 +51,13 @@ func TestRegister(t *testing.T) {
 	for _, test := range testCases {
 		t.Run(test.name, func(t *testing.T) {
 			test.mockFunc()
-			err := th.App.Register(ctx, test.request)
+			response, err := th.App.GetProfile(test.request)
 			if (err != nil) != test.wantErr {
 				t.Errorf("expected error = %v, but got = %v", test.wantErr, err)
+			}
+
+			if response != nil && response != test.response {
+				t.Errorf("expected = %v, but got = %v", test.response, response)
 			}
 		})
 	}

@@ -8,3 +8,8 @@ type LoginRequest struct {
 type LoginResponse struct {
 	JWTToken string `json:"jwt_token"`
 }
+
+type JWTClaims struct {
+	UserID float64
+	Email  string
+}
