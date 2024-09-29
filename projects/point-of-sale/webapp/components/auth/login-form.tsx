@@ -1,13 +1,23 @@
 "use client";
 
-import Link from "next/link";
 import { LoginSchema } from "@/lib/validators/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { loginQuery } from "@/queries/auth";
+import { profileQuery } from "@/queries/profile";
 import { z } from "zod";
-import { jwtDecode } from "jwt-decode";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
 import {
   Card,
   CardContent,
@@ -15,12 +25,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useAppDispatch, useAppSelector } from "@/stores";
+import { setData } from "@/stores/slices/auth";
+import { setDialog } from "@/stores/slices/dialog";
+import { createSession } from "@/lib/session";
 
 const LoginForm = () => {
+  const {
+    data: { login },
+  } = useAppSelector((state) => state.dialogReducer);
+  const dispatch = useAppDispatch();
+
+  const router = useRouter();
+
   const BaseLoginSchema = LoginSchema();
-  const methods = useForm<z.infer<typeof BaseLoginSchema>>({
+  const form = useForm<z.infer<typeof BaseLoginSchema>>({
     resolver: zodResolver(BaseLoginSchema),
     defaultValues: {
       email: "",
@@ -35,8 +56,18 @@ const LoginForm = () => {
         password: values?.password,
       });
       if (response?.status === 200) {
-        const decodedToken: any = jwtDecode(response?.data?.jwt_token);
-        console.log(decodedToken);
+        console.log("trying to store session");
+        await createSession(response?.data?.jwt_token);
+      }
+      const responseProfile = await profileQuery();
+      if (responseProfile.status === 200) {
+        dispatch(
+          setData({
+            data: responseProfile?.data,
+          })
+        );
+        dispatch(setDialog({ login: false }));
+        router.push("/dashboard");
       }
     } catch (error) {
       console.log(error);
@@ -52,45 +83,37 @@ const LoginForm = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <div className="grid gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  onChange={() => {
-                    console.log("changing!");
-                  }}
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                />
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                  <Link
-                    href="#"
-                    className="ml-auto inline-block text-sm underline"
-                  >
-                    Forgot your password?
-                  </Link>
-                </div>
-                <Input id="password" type="password" required />
-              </div>
-              <Button type="submit" className="w-full">
-                Login
-              </Button>
-            </div>
-            <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
-              <Link href="#" className="underline">
-                Sign up
-              </Link>
-            </div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Email" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Password" type="password" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit">Submit</Button>
           </form>
-        </FormProvider>
+        </Form>
       </CardContent>
     </Card>
   );
