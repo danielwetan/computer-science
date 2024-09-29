@@ -63,7 +63,7 @@ func (a *app) createJWTToken(userID int, email string) (string, error) {
 		},
 	)
 
-	tokenString, err := token.SignedString([]byte(os.Getenv("POINT_OF_SALE_JWT_SECRET")))
+	tokenString, err := token.SignedString([]byte(os.Getenv("SHORTENER_JWT_SECRET")))
 	if err != nil {
 		return "", err
 	}
@@ -73,7 +73,7 @@ func (a *app) createJWTToken(userID int, email string) (string, error) {
 
 func (a *app) ClaimJWTToken(tokenString string) (*model.JWTClaims, error) {
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		return []byte(os.Getenv("POINT_OF_SALE_JWT_SECRET")), nil
+		return []byte(os.Getenv("SHORTENER_JWT_SECRET")), nil
 	})
 
 	if err != nil {

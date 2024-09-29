@@ -7,7 +7,7 @@ go install -tags 'mysql' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 Create database
 
 ```
-CREATE DATABASE point_of_sale;
+CREATE DATABASE shortener;
 ```
 
 Create migration
@@ -19,11 +19,11 @@ migrate create -ext sql -dir ./internal/store/sqlstore/mysql-migration create_ta
 Up
 
 ```
-migrate -path ./internal/store/sqlstore/mysql-migration -database "mysql://root:pass@tcp(localhost:3306)/point_of_sale" up
+migrate -path ./internal/store/sqlstore/mysql-migration -database "mysql://root:pass@tcp(localhost:3306)/shortener" up
 ```
 
 Down
 
 ```
-migrate -path ./internal/store/sqlstore/mysql-migration -database "mysql://root:pass@tcp(localhost:3306)/point_of_sale" down
+migrate -path ./internal/store/sqlstore/mysql-migration -database "mysql://root:pass@tcp(localhost:3306)/shortener" down
 ```
