@@ -1,25 +1,36 @@
 "use client";
 
-import Link from "next/link";
 import { LoginSchema } from "@/lib/validators/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { loginQuery } from "@/queries/auth";
+import { profileQuery } from "@/queries/profile";
 import { z } from "zod";
-import { jwtDecode } from "jwt-decode";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAppDispatch, useAppSelector } from "@/stores";
+import { setData } from "@/stores/slices/auth";
+import { setDialog } from "@/stores/slices/dialog";
+import { createSession } from "@/lib/session";
 
 const LoginForm = () => {
+  const {
+    data: { login },
+  } = useAppSelector((state) => state.dialogReducer);
+  const dispatch = useAppDispatch();
+
+  const router = useRouter();
+
   const BaseLoginSchema = LoginSchema();
   const form = useForm<z.infer<typeof BaseLoginSchema>>({
     resolver: zodResolver(BaseLoginSchema),
@@ -36,8 +47,18 @@ const LoginForm = () => {
         password: values?.password,
       });
       if (response?.status === 200) {
-        const decodedToken: any = jwtDecode(response?.data?.jwt_token);
-        console.log(decodedToken);
+        console.log("trying to store session");
+        await createSession(response?.data?.jwt_token);
+      }
+      const responseProfile = await profileQuery();
+      if (responseProfile.status === 200) {
+        dispatch(
+          setData({
+            data: responseProfile?.data,
+          })
+        );
+        dispatch(setDialog({ login: false }));
+        router.push("/dashboard");
       }
     } catch (error) {
       console.log(error);
