@@ -51,7 +51,7 @@ func (a *API) handleLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	loginResponse, err := a.app.Login(r.Context(), loginData)
+	loginResponse, err := a.app.Login(r.Context(), &loginData)
 	if err != nil {
 		errorResponse(w, err)
 		return

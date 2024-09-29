@@ -71,7 +71,7 @@ func (a *app) createJWTToken(userID int, email string) (string, error) {
 	return tokenString, nil
 }
 
-func (a *app) Login(ctx context.Context, request model.LoginRequest) (*model.LoginResponse, error) {
+func (a *app) Login(ctx context.Context, request *model.LoginRequest) (*model.LoginResponse, error) {
 	if err := pkg.Validator.ValidateStruct(request); err != nil {
 		return nil, err
 	}
