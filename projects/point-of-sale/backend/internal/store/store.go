@@ -13,4 +13,8 @@ type Store interface {
 	// Users
 	GetUserByEmail(ctx context.Context, email string) (*model.User, error)
 	CreateUser(ctx context.Context, request *model.CreateUserRequest) error
+
+	// Short Url
+	CreateShortUrl(ctx context.Context, request *model.CreateShortUrlRequest) (*model.CreateShortUrlResponse, error)
+	GetShortUrl(ctx context.Context, request *model.GetShortUrlRequest) (*model.ShortUrl, error)
 }

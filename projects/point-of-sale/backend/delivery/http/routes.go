@@ -13,6 +13,7 @@ func (a *API) RegisterRoutes(r *mux.Router) {
 	a.registerSystemRoutes(v1)
 	a.registerAuthRoutes(v1)
 	a.registerUserRoutes(v1)
+	a.registerShortUrlRoutes(v1)
 }
 
 func (a *API) secureRoutes(handler func(w http.ResponseWriter, r *http.Request)) func(w http.ResponseWriter, r *http.Request) {

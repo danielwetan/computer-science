@@ -3,7 +3,6 @@ CREATE TABLE short_urls (
   user_id int NOT NULL DEFAULT 1,
   target varchar(255) NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP,
   PRIMARY KEY (shortcode)
 );
 
