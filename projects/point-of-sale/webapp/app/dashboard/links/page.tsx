@@ -3,8 +3,9 @@ import ShortUrlModal from "@/components/short_url/short-url-modal";
 export default function LinksPage() {
   return (
     <>
-      <div className="flex items-left">
+      <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold md:text-2xl">Links</h1>
+        <ShortUrlModal />
       </div>
       <div
         className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
@@ -17,7 +18,6 @@ export default function LinksPage() {
           <p className="text-sm text-muted-foreground">
             You can start selling as soon as you add a links.
           </p>
-          <ShortUrlModal />
         </div>
       </div>
     </>
