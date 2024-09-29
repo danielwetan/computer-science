@@ -5,7 +5,7 @@ import (
 	"runtime"
 )
 
-func (a *App) GetServerMetadata() *model.ServerMetadata {
+func (a *app) GetServerMetadata() *model.ServerMetadata {
 	var dbType string
 	var dbVersion string
 	if a != nil && a.store != nil {

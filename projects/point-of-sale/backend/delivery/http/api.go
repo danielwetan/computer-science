@@ -11,10 +11,10 @@ import (
 )
 
 type API struct {
-	app *app.App
+	app app.App
 }
 
-func New(app *app.App) *API {
+func New(app app.App) *API {
 	return &API{
 		app: app,
 	}

@@ -1,18 +1,21 @@
 package app
 
-import "backend/internal/store"
+import (
+	"backend/internal/store"
+	"backend/model"
+)
 
-type App struct {
+type app struct {
 	store store.Store
 }
 
-type Services struct {
-	Store store.Store
+type App interface {
+	GetServerMetadata() *model.ServerMetadata
 }
 
-func New(services Services) *App {
-	app := &App{
-		store: services.Store,
+func New(store store.Store) App {
+	app := &app{
+		store: store,
 	}
 
 	return app

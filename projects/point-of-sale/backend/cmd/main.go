@@ -41,10 +41,7 @@ func main() {
 		log.Printf("failed to connect to MySQL %s:", err)
 	}
 
-	appServices := app.Services{
-		Store: sqlStore,
-	}
-	mainApp := app.New(appServices)
+	mainApp := app.New(sqlStore)
 	server := api.New(mainApp)
 
 	r := mux.NewRouter()
