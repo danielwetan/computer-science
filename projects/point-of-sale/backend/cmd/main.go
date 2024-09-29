@@ -29,8 +29,18 @@ func main() {
 		handlers.AllowedHeaders([]string{"Content-Type", "Authorization"}),
 	)
 
+	r.Use(api.LoggingMiddleware)
+
 	server.RegisterRoutes(r)
 
-	log.Println(http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), corsHandler(r)))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8000"
+	}
 
+	log.Printf("Server starting on port %s", port)
+	err = http.ListenAndServe(fmt.Sprintf(":%s", port), corsHandler(r))
+	if err != nil {
+		log.Fatalf("Error starting server: %v", err)
+	}
 }
