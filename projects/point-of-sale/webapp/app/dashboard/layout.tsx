@@ -6,7 +6,7 @@ import {
   Package,
   Package2,
   CircleUser,
-  Search,
+  Link as LinkIcon,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -44,10 +44,6 @@ export default async function DashboardLayout({
               <Package2 className="h-6 w-6" />
               <span className="">Shortener</span>
             </Link>
-            <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
-              <Bell className="h-4 w-4" />
-              <span className="sr-only">Toggle notifications</span>
-            </Button>
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
@@ -59,18 +55,11 @@ export default async function DashboardLayout({
                 Dashboard
               </Link>
               <Link
-                href="/dashboard/sales"
-                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-              >
-                <Package className="h-4 w-4" />
-                Sales
-              </Link>
-              <Link
-                href="/dashboard/product"
+                href="/dashboard/links"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
-                <Package className="h-4 w-4" />
-                Product
+                <LinkIcon className="h-4 w-4" />
+                Links
               </Link>
             </nav>
           </div>
@@ -101,41 +90,23 @@ export default async function DashboardLayout({
                   <span className="sr-only">Shortener</span>
                 </Link>
                 <Link
-                  href="#"
+                  href="/dashboard"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
                   <Home className="h-5 w-5" />
                   Dashboard
                 </Link>
                 <Link
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Package className="h-5 w-5" />
-                  Sales
-                </Link>
-                <Link
-                  href="#"
+                  href="/dashboard/links"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
                   <Home className="h-5 w-5" />
-                  Product
+                  Links
                 </Link>
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="w-full flex-1">
-            <form>
-              <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Search products..."
-                  className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
-                />
-              </div>
-            </form>
-          </div>
+          <div className="w-full flex-1"></div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
