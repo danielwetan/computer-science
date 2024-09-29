@@ -11,7 +11,8 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-
+import { getSession } from "@/lib/session";
+import { redirect } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,11 +24,15 @@ import {
 
 import { Input } from "@/components/ui/input";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // authwall
+  const session = await getSession();
+  if (!session) return redirect("/auth/login");
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       {/* side menu */}
