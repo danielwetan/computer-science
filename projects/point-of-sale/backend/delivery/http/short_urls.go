@@ -3,6 +3,7 @@ package api
 import (
 	"backend/model"
 	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
 
@@ -12,6 +13,9 @@ import (
 func (a *API) registerShortUrlRoutes(r *mux.Router) {
 	// r.HandleFunc("/short_urls", a.secureRoutes(a.handleCreateShortUrl)).Methods(http.MethodPost)
 	r.HandleFunc("/short_urls/public", a.handleCreateShortUrlPublic).Methods(http.MethodPost)
+
+	// simplify the redirection logic
+	// for the real-world app we can separate this as a different service with custom domain
 	r.HandleFunc("/short_urls/{code}", a.handleGetShortUrl).Methods(http.MethodGet)
 }
 
@@ -55,11 +59,10 @@ func (a *API) handleGetShortUrl(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response, err := json.Marshal(getShortUrlResponse)
-	if err != nil {
-		errorResponse(w, err)
+	if getShortUrlResponse.Target == "" {
+		errorResponse(w, errors.New("invalid short code or URL not found"))
 		return
 	}
 
-	jsonStringResponse(w, http.StatusOK, string(response))
+	http.Redirect(w, r, getShortUrlResponse.Target, http.StatusFound)
 }
