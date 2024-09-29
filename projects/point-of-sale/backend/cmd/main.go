@@ -2,6 +2,7 @@ package main
 
 import (
 	api "backend/delivery/http"
+	"backend/delivery/http/middleware"
 	"backend/internal/app"
 	"fmt"
 	"log"
@@ -25,12 +26,11 @@ func main() {
 	r := mux.NewRouter()
 	corsHandler := handlers.CORS(
 		handlers.AllowedOrigins([]string{"*"}),
-		handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}),
+		handlers.AllowedMethods([]string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete}),
 		handlers.AllowedHeaders([]string{"Content-Type", "Authorization"}),
 	)
 
-	r.Use(api.LoggingMiddleware)
-
+	r.Use(middleware.LoggingMiddleware)
 	server.RegisterRoutes(r)
 
 	port := os.Getenv("PORT")
