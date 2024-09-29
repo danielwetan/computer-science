@@ -4,10 +4,15 @@ import (
 	api "backend/delivery/http"
 	"backend/delivery/http/middleware"
 	"backend/internal/app"
+	"backend/internal/store/sqlstore"
+	"backend/model"
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
+
+	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
@@ -20,7 +25,26 @@ func main() {
 		log.Printf("error loading .env file: %s", err)
 	}
 
-	mainApp := app.New()
+	db, err := sql.Open(model.DBTypeMySQL, os.Getenv("MYSQL_CONNECTION_STRING"))
+	if err != nil {
+		log.Printf("failed to connect to mysql %s", err)
+	}
+	defer db.Close()
+
+	err = db.Ping()
+	if err != nil {
+		log.Printf("failed to connect to mysql %s", err)
+	}
+
+	sqlStore, err := sqlstore.New(db)
+	if err != nil {
+		log.Printf("failed to connect to MySQL %s:", err)
+	}
+
+	appServices := app.Services{
+		Store: sqlStore,
+	}
+	mainApp := app.New(appServices)
 	server := api.New(mainApp)
 
 	r := mux.NewRouter()

@@ -1,9 +1,19 @@
 package app
 
-type App struct{}
+import "backend/internal/store"
 
-func New() *App {
-	app := &App{}
+type App struct {
+	store store.Store
+}
+
+type Services struct {
+	Store store.Store
+}
+
+func New(services Services) *App {
+	app := &App{
+		store: services.Store,
+	}
 
 	return app
 }
