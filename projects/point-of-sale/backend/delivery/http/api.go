@@ -6,8 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-
-	"github.com/gorilla/mux"
 )
 
 type API struct {
@@ -18,11 +16,6 @@ func New(app app.App) *API {
 	return &API{
 		app: app,
 	}
-}
-
-func (a *API) RegisterRoutes(r *mux.Router) {
-	v1 := r.PathPrefix("/v1").Subrouter()
-	a.registerSystemRoutes(v1)
 }
 
 const (
