@@ -11,5 +11,6 @@ coverage:
 	go test -coverprofile=coverage.out ./... -count=1 && go tool cover -html=coverage.out 
 
 mock:
-	mockgen -source=store/store.go -destination=store/mockstore/mockstore.go --package=mockstore
+	mockgen -source=internal/store/store.go -destination=internal/store/mockstore/mockstore.go --package=mockstore
+
 

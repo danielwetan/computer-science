@@ -9,6 +9,7 @@ require (
 	github.com/gorilla/handlers v1.5.2
 	github.com/gorilla/mux v1.8.1
 	github.com/joho/godotenv v1.5.1
+	go.uber.org/mock v0.4.0
 	golang.org/x/crypto v0.19.0
 )
 
