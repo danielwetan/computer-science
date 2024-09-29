@@ -1,9 +1,7 @@
 import Link from "next/link";
 import {
-  Bell,
   Home,
   Menu,
-  Package,
   Package2,
   CircleUser,
   Link as LinkIcon,
@@ -21,8 +19,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-import { Input } from "@/components/ui/input";
 
 export default async function DashboardLayout({
   children,

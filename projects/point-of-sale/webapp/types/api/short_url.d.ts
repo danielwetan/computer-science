@@ -1,0 +1,3 @@
+interface CreateShortUrlPayload {
+  target: string;
+}

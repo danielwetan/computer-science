@@ -27,15 +27,15 @@ import {
 } from "@/components/ui/card";
 
 import { Input } from "@/components/ui/input";
-import { useAppDispatch, useAppSelector } from "@/stores";
+import { useAppDispatch } from "@/stores";
 import { setData } from "@/stores/slices/auth";
-import { setDialog } from "@/stores/slices/dialog";
+// import { setDialog } from "@/stores/slices/dialog";
 import { createSession } from "@/lib/session";
 
 const LoginForm = () => {
-  const {
-    data: { login },
-  } = useAppSelector((state) => state.dialogReducer);
+  // const { 
+  //   data: { login },
+  // } = useAppSelector((state) => state.dialogReducer);
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -56,7 +56,6 @@ const LoginForm = () => {
         password: values?.password,
       });
       if (response?.status === 200) {
-        console.log("trying to store session");
         await createSession(response?.data?.jwt_token);
       }
       const responseProfile = await profileQuery();
@@ -66,7 +65,7 @@ const LoginForm = () => {
             data: responseProfile?.data,
           })
         );
-        dispatch(setDialog({ login: false }));
+        // dispatch(setDialog({ login: false }));
         router.push("/dashboard");
       }
     } catch (error) {

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import ShortUrlModal from "@/components/short_url/short-url-modal";
 
 export default function LinksPage() {
   return (
@@ -17,7 +17,7 @@ export default function LinksPage() {
           <p className="text-sm text-muted-foreground">
             You can start selling as soon as you add a links.
           </p>
-          <Button className="mt-4">Add Link</Button>
+          <ShortUrlModal />
         </div>
       </div>
     </>

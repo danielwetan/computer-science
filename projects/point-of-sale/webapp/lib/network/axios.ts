@@ -9,6 +9,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   // @ts-ignore
+  // @ts-expect-error
   async (config: AxiosRequestConfig): Promise<AxiosRequestConfig> => {
     config.headers = config.headers ?? {};
 
