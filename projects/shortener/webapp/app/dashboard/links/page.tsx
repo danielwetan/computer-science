@@ -5,17 +5,6 @@ import { getShortUrlsQuery } from "@/queries/short_url";
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -61,7 +50,7 @@ export default function LinksPage() {
           <TableBody>
             {shortUrls?.map((item) => {
               return (
-                <TableRow>
+                <TableRow key={item.shortcode}>
                   <TableCell>
                     <div className="font-medium">
                       <Link
@@ -84,6 +73,7 @@ export default function LinksPage() {
           </TableBody>
         </Table>
       </div>
+      {/* not found state */}
       {/* <div
         className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
         x-chunk="dashboard-02-chunk-1"
