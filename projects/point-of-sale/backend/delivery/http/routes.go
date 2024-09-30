@@ -9,6 +9,9 @@ import (
 )
 
 func (a *API) RegisterRoutes(r *mux.Router) {
+	public := r.PathPrefix("/").Subrouter()
+	a.registerShortUrlRedirectionRoutes(public)
+
 	v1 := r.PathPrefix("/v1").Subrouter()
 	a.registerSystemRoutes(v1)
 	a.registerAuthRoutes(v1)
