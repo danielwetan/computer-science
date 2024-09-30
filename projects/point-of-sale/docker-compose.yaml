@@ -27,7 +27,7 @@ services:
         "--collation-server=utf8mb4_unicode_ci",
       ]
     volumes:
-      - point_of_sale_mysql:/var/lib/mysql
+      - shortener_mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: "pass"
 
@@ -38,7 +38,7 @@ services:
       - "6379:6379"
     command: redis-server --save 20 1 --loglevel warning
     volumes:
-      - point_of_sale_redis:/data
+      - shortener_redis:/data
 
   mongodb:
     image: mongo:6.0.16
@@ -46,15 +46,15 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - point_of_sale_mongo:/data/db
+      - shortener_mongo:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: "root"
       MONGO_INITDB_ROOT_PASSWORD: "pass"
 
 volumes:
-  point_of_sale_mysql:
+  shortener_mysql:
     driver: local
-  point_of_sale_redis:
+  shortener_redis:
     driver: local
-  point_of_sale_mongo:
+  shortener_mongo:
     driver: local

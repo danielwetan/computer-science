@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
-
-import { getSession } from "@/lib/session";
+import { getSession, logout } from "@/lib/session";
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_API,
@@ -10,6 +9,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   // @ts-ignore
+  // @ts-expect-error
   async (config: AxiosRequestConfig): Promise<AxiosRequestConfig> => {
     config.headers = config.headers ?? {};
 
@@ -25,21 +25,21 @@ instance.interceptors.request.use(
   }
 );
 
-// instance.interceptors.response.use(
-//   (res: AxiosResponse): AxiosResponse => {
-//     return res;
-//   },
-//   (err: AxiosError) => {
-//     switch (err.response?.status) {
-//       case 401:
-//         logout();
-//         return Promise.reject(err);
+instance.interceptors.response.use(
+  (res: AxiosResponse): AxiosResponse => {
+    return res;
+  },
+  (err: AxiosError) => {
+    switch (err.response?.status) {
+      case 401:
+        logout();
+        return Promise.reject(err);
 
-//       default:
-//         return Promise.reject(err);
-//     }
-//   }
-// );
+      default:
+        return Promise.reject(err);
+    }
+  }
+);
 
 export const HTTP_METHODS = {
   GET: "GET",

@@ -40,6 +40,21 @@ func (m *MockStore) EXPECT() *MockStoreMockRecorder {
 	return m.recorder
 }
 
+// CreateShortUrl mocks base method.
+func (m *MockStore) CreateShortUrl(ctx context.Context, request *model.CreateShortUrlRequest) (*model.CreateShortUrlResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateShortUrl", ctx, request)
+	ret0, _ := ret[0].(*model.CreateShortUrlResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateShortUrl indicates an expected call of CreateShortUrl.
+func (mr *MockStoreMockRecorder) CreateShortUrl(ctx, request any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateShortUrl", reflect.TypeOf((*MockStore)(nil).CreateShortUrl), ctx, request)
+}
+
 // CreateUser mocks base method.
 func (m *MockStore) CreateUser(ctx context.Context, request *model.CreateUserRequest) error {
 	m.ctrl.T.Helper()
@@ -80,6 +95,21 @@ func (m *MockStore) DBVersion() string {
 func (mr *MockStoreMockRecorder) DBVersion() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DBVersion", reflect.TypeOf((*MockStore)(nil).DBVersion))
+}
+
+// GetShortUrl mocks base method.
+func (m *MockStore) GetShortUrl(ctx context.Context, request *model.GetShortUrlRequest) (*model.ShortUrl, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetShortUrl", ctx, request)
+	ret0, _ := ret[0].(*model.ShortUrl)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetShortUrl indicates an expected call of GetShortUrl.
+func (mr *MockStoreMockRecorder) GetShortUrl(ctx, request any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetShortUrl", reflect.TypeOf((*MockStore)(nil).GetShortUrl), ctx, request)
 }
 
 // GetUserByEmail mocks base method.
