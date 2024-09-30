@@ -4,6 +4,7 @@ import (
 	"backend/model"
 	"context"
 	"database/sql"
+	"errors"
 )
 
 const ShortUrlTableName = "short_urls"
@@ -57,4 +58,38 @@ func (s *SQLStore) GetShortUrl(ctx context.Context, request *model.GetShortUrlRe
 	}
 
 	return &shortUrl, nil
+}
+
+// TODO: data filter
+func (s *SQLStore) GetShortUrls(ctx context.Context) ([]*model.ShortUrl, error) {
+	var results []*model.ShortUrl
+
+	stmt, err := s.db.PrepareContext(ctx, `SELECT 
+		shortcode,
+		user_id,
+		target,
+		created_at
+	FROM short_urls`)
+	if err != nil {
+		return nil, errors.New("failed to prepare statement")
+	}
+
+	rows, err := stmt.QueryContext(ctx)
+	if err == sql.ErrNoRows {
+		return nil, errors.New("data not found")
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	for rows.Next() {
+		var shortUrl model.ShortUrl
+		err := rows.Scan(&shortUrl.ShortCode, &shortUrl.UserID, &shortUrl.Target, &shortUrl.CreatedAt)
+		if err != nil {
+			return nil, err
+		}
+		results = append(results, &shortUrl)
+	}
+
+	return results, nil
 }

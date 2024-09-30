@@ -24,6 +24,7 @@ type App interface {
 	// Short Urls
 	CreateShortUrl(ctx context.Context, request *model.CreateShortUrlRequest) (*model.CreateShortUrlResponse, error)
 	GetShortUrl(ctx context.Context, request *model.GetShortUrlRequest) (*model.ShortUrl, error)
+	GetShortUrls(ctx context.Context) ([]*model.ShortUrl, error)
 }
 
 func New(store store.Store) App {

@@ -31,3 +31,7 @@ func (a *app) GetShortUrl(ctx context.Context, request *model.GetShortUrlRequest
 
 	return a.store.GetShortUrl(ctx, request)
 }
+
+func (a *app) GetShortUrls(ctx context.Context) ([]*model.ShortUrl, error) {
+	return a.store.GetShortUrls(ctx)
+}
