@@ -33,4 +33,8 @@ func main() {
 		log.Fatal(pingErr)
 	}
 	fmt.Println("Connected!")
+
+	db.SetMaxOpenConns(10)
+	fmt.Println("open connection: ", db.Stats().OpenConnections)
+	fmt.Println("max open connection: ", db.Stats().MaxOpenConnections)
 }
