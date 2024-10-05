@@ -10,6 +10,8 @@ import (
 
 var db *sql.DB
 
+// reference
+// https://go.dev/doc/tutorial/database-access
 func main() {
 	cfg := mysql.Config{
 		User:                 "root",
