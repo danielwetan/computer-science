@@ -34,9 +34,9 @@ Sure! Here’s the complete explanation, including the database schema and SQL q
 - **Sample Records:**
   | id    | name                | credits |
   |-------|---------------------|---------|
-  | 101   | introduction to cs   | 3       |
-  | 102   | data structures      | 4       |
-  | csh2c3| advanced programming | 4       |
+  | c1   | introduction to cs   | 3       |
+  | c2   | data structures      | 4       |
+  | c3 | advanced programming | 4       |
 
 #### 3. enrollments Table
 - **Table Name:** `enrollments`
@@ -58,52 +58,52 @@ Sure! Here’s the complete explanation, including the database schema and SQL q
 
 #### a. Searching with Non-Key Conditions
 
-**Query 1: Search for Students from Bandung (1 Table)**
+**Query 1: Search for students from "bandung" (1 Table)**
 
 ```sql
 SELECT * FROM students
 WHERE city = 'bandung';
 ```
 
-**Query 2: Search for Students Enrolled in the Course "s1 informatika" (2 Tables)**
+**Query 2: Search for students enrolled in the course "data structures" (2 Tables)**
 
 ```sql
-SELECT s.first_name, s.last_name, c.name
+SELECT s.id, s.first_name, s.last_name, c.id, c.name
 FROM students s
 JOIN enrollments e ON s.id = e.student_id
 JOIN courses c ON e.course_id = c.id
-WHERE c.name = 's1 informatika';
+WHERE c.name = 'data structures';
 ```
 
-**Query 3: Search for Students from Bandung Enrolled in the Course with Code "csh2c3" (3 Tables)**
+**Query 3: Search for students from "bandung" enrolled in the course "data structures" (3 Tables)**
 
 ```sql
-SELECT s.first_name, s.last_name, c.name
+SELECT s.id, s.first_name, s.last_name, c.id, c.name
 FROM students s
 JOIN enrollments e ON s.id = e.student_id
 JOIN courses c ON e.course_id = c.id
-WHERE s.city = 'bandung' AND c.id = 'csh2c3';
+WHERE s.city = 'bandung' AND c.name = 'data structures';
 ```
 
 #### b. Searching with Key Conditions
 
-**Query 4: Search for Students with Student ID = 1103120066 (2 Tables)**
+**Query 4: Search for students with id = 10 (2 Tables)**
 
 ```sql
-SELECT s.first_name, s.last_name
+SELECT s.id, s.first_name, s.last_name, e.id, e.course_id
 FROM students s
 JOIN enrollments e ON s.id = e.student_id
-WHERE s.id = 1103120066;
+WHERE s.id = 10;
 ```
 
-**Query 5: Search for Students with Student ID Starting with '110313' Who Are Enrolled in the Course with Code "csh2c3" (3 Tables)**
+**Query 5: Search for students with id starting with '2' and enrolled in the course with code "c2" (3 Tables)**
 
 ```sql
-SELECT s.first_name, s.last_name, c.name
+SELECT s.id, s.first_name, s.last_name, c.id, c.name
 FROM students s
 JOIN enrollments e ON s.id = e.student_id
 JOIN courses c ON e.course_id = c.id
-WHERE s.id LIKE '110313%' AND c.id = 'csh2c3';
+WHERE s.id LIKE '2%' AND c.id = 'c2';
 ```
 
 ### 3. Executing the Queries in DBMS
