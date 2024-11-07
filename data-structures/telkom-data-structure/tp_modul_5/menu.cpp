@@ -18,6 +18,7 @@ int selectMenu() {
   cout << "2. Menampilkan semua data" << endl;
   cout << "3. Mengembalikan data terkecil" << endl;
   cout << "4. Menambahkan ke tengah list" << endl;
+  cout << "0. Exit" << endl;
   cout << "Pilihlah menu: " << endl;
 
   int input = 0;

@@ -39,4 +39,7 @@ int main() {
     cout << endl;
     pilihan = selectMenu();
   }
+
+  cout << "ANDA TELAH KELUAR DARI PROGRAM" << endl;
+  return 0;
 }
