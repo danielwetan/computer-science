@@ -2,7 +2,6 @@
 #include "list.h"
 
 int main() {
-  // int NUM = 0, pilihan = 0, x;
   int pilihan = 0, x;
   address min;
   List L;

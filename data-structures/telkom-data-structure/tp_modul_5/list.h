@@ -28,3 +28,4 @@ void printInfo(List L);
 address findMin(List L);
 
 void insertMiddle(List &L, int value);
+
