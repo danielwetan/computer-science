@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      href="resources/favicon.ico"
+      type="image/x-icon"
+      sizes="96x96"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+    <title>Simple Homepage - Alarado | devChallenges.io</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="main-nav">
+        <img
+          src="https://i.ibb.co/wwLhz98/logo.png"
+          alt="Microsoft"
+          class="logo"
+        />
+
+        <ul class="main-menu">
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Product</a></li>
+          <li><a href="#">Resource</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+
+        <ul class="right-menu">
+          <div class="toggle-container">
+            <input type="checkbox" id="toggle" class="toggle-checkbox" />
+            <label for="toggle" class="toggle-label">
+              <span class="moon-icon">
+                <img src="resources/Moon_fill.svg" alt="Moon Icon" />
+              </span>
+              <span class="sun-icon">
+                <img src="resources/Sun_fill.svg" alt="Sun Icon" />
+              </span>
+              <span class="toggle-ball"></span>
+            </label>
+          </div>
+        </ul>
+      </nav>
+
+      <section class="hero">
+        <div class="content">
+          <h2>😎 Simple way to communicate</h2>
+          <h1>Actions for Accessibility in Design</h1>
+          <p>
+            The fastest way to build and deploy websites with reusable
+            components.
+          </p>
+          <div class="action-item">
+            <button class="btn">Get Started</button>
+            <a href="#">Get live demo</a>
+          </div>
+          <div class="disclaimer">
+            <p>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="#2a4dd0"
+                  stroke-width="2"
+                />
+                <path
+                  d="M7 12l3 3 7-7"
+                  stroke="#2a4dd0"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              No credit card required
+            </p>
+            <p>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="#2a4dd0"
+                  stroke-width="2"
+                />
+                <path
+                  d="M7 12l3 3 7-7"
+                  stroke="#2a4dd0"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              No software to install
+            </p>
+          </div>
+        </div>
+        <div class="content-img">
+          <img
+            src="resources/hero-image-simple-homepage.png"
+            alt="Hero Image"
+          />
+        </div>
+      </section>
+    </div>
+    <script>
+      const toggle = document.getElementById("toggle");
+
+      toggle.addEventListener("change", () => {
+        document.body.classList.toggle("dark-mode");
+      });
+    </script>
+  </body>
+</html>
