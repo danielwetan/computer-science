@@ -1,0 +1,45 @@
+@startuml
+digraph g {
+    graph [rankdir = "LR"]; // Layout left-to-right
+
+    // Penumpang Nodes
+    "Penumpang1" [
+        label = "<f0> ID: 1 | Nama: John Doe | Usia: 30 | Gender: Pria | <f1> Next"
+        shape = "record"
+    ];
+    "Penumpang2" [
+        label = "<f0> ID: 2 | Nama: Jane Smith | Usia: 28 | Gender: Wanita | <f1> Next"
+        shape = "record"
+    ];
+
+    // Penerbangan Nodes
+    "Penerbangan1" [
+        label = "<f0> Kode: FL001 | Asal: Jakarta | Tujuan: Bali | Tanggal: 2024-12-20 | Kuota: 5 | Harga: 1.2M | <f1> Next"
+        shape = "record"
+    ];
+    "Penerbangan2" [
+        label = "<f0> Kode: FL002 | Asal: Bali | Tujuan: Surabaya | Tanggal: 2024-12-21 | Kuota: 3 | Harga: 800K | <f1> Next"
+        shape = "record"
+    ];
+
+    // Booking Nodes
+    "Booking1" [
+        label = "<f0> ID Booking: 101 | Total Harga: 1.2M | Tanggal: 2024-12-15 | <f1> Next"
+        shape = "record"
+    ];
+    "Booking2" [
+        label = "<f0> ID Booking: 102 | Total Harga: 800K | Tanggal: 2024-12-16 | <f1> Next"
+        shape = "record"
+    ];
+
+    // Relationships
+    "Penumpang1":f1 -> "Penumpang2":f0 [label = "Next"];
+    "Penumpang1":f0 -> "Booking1":f0 [label = "Relasi"];
+    "Penumpang2":f0 -> "Booking2":f0 [label = "Relasi"];
+
+    "Booking1":f0 -> "Penerbangan1":f0 [label = "Relasi"];
+    "Booking2":f0 -> "Penerbangan2":f0 [label = "Relasi"];
+
+    "Penerbangan1":f1 -> "Penerbangan2":f0 [label = "Next"];
+}
+@enduml
